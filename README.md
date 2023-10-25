@@ -8,6 +8,6 @@ This exception occurs at startup
 
 ### Deploy command
 ```agsl
-mvn clean compiler:compiler jar:jar
+mvn clean compiler:compile jar:jar
 kamel run --name camel-soap-demo DemoRoute.java
 ```

@@ -17,9 +17,15 @@ import net.webservicex.GeoIPServiceSoap;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.soap.SoapDataFormat;
 import org.apache.camel.dataformat.soap.name.ServiceInterfaceStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jws.WebParam;
 
 public class DemoRoute extends RouteBuilder {
 
+
+    private static final Logger log = LoggerFactory.getLogger(DemoRoute.class);
 
     @Override
     public void configure() throws Exception {
@@ -29,6 +35,7 @@ public class DemoRoute extends RouteBuilder {
         SoapDataFormat soapDataFormat = new SoapDataFormat();
         soapDataFormat.setContextPath("net.webservicex");
 
+        log.info("classloader:{}", WebParam.class.getClassLoader());
         soapDataFormat.setElementNameStrategy(new ServiceInterfaceStrategy(GeoIPServiceSoap.class , true));
         // Source: Knative Event
         from("servlet:hello/soap")
